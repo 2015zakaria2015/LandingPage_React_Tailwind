@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 const Navbar = () => {
@@ -7,6 +7,19 @@ const Navbar = () => {
   const handleNav = () => {
     setNav(!nav);
   };
+
+  const handleResize = () => {
+    if (window.innerWidth >= 768) {
+      setNav(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto p-4 text-white">
